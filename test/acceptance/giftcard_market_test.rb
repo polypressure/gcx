@@ -64,8 +64,15 @@ class GiftcardMarketTest < Minitest::Test
     refute_equal 0, status
   end
 
-  test "processes big complicated file" do
-    skip
+  test "processes big file" do
+    expected_stdout = File.read('test/fixtures/expected-output/generated-10000-stdout.txt')
+
+    cmd = "bin/giftcard_market test/fixtures/generated-10000-input.txt"
+    actual_stdout, actual_stderr, status = Open3.capture3(cmd)
+
+    assert_equal expected_stdout, actual_stdout
+    assert_equal "", actual_stderr
+    assert_equal 0, status
   end
 
 end
