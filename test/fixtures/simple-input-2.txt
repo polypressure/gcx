@@ -1,0 +1,12 @@
+add_account Alice
+add_account Carol
+add_account Dan
+list_product Carol "Victoria's Secret" 5884500005 $175.00 $160.00
+add_account Eve
+buy_product Eve "Victoria's Secret" 5884500005
+list_product Dan Apple 1111122222 $550.00 $500.00
+buy_product Carol Apple 1111122222
+list_product Carol "Kohl's" 3241677887 $400.00 $375.00
+buy_product Dan "Kohl's" 3241677887
+list_product Carol "Old Navy" 1010180808 $50.00 $40.00
+buy_product Alice "Old Navy" 1010180808

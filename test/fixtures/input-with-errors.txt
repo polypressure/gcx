@@ -1,0 +1,13 @@
+add_account Alice 0.17
+add_acount Craig 0.15
+add_account Chuck 20%
+add_account "Billy Bob"
+list_product Alyce Amazon.com 1234512345 $100.00 $90.00
+buy_product "Bille Bob" Amazon 1234512345
+list_product "Billy Bob" "Old Navy" 7772228883 $300.00
+list_product "Billy Bob" "Old Navy" 7772228883 50 $300.00 $280.00
+list_product "Billy Bob" "Old Navy" 7772228883 d300.00 $280.00
+list_product Alice Amazon.com 1234512345 $100.00 $190.00
+list_product Alice Amazon.com 1234512345 $205.00 $190.00
+list_product Alice Amazon.com 1234512345d $100.00 $90.00
+buy_product "Billy Bob" Amazon.com 1234512345

@@ -1,0 +1,9 @@
+test/fixtures/input-with-errors.txt:2 - Invalid command add_acount
+test/fixtures/input-with-errors.txt:3 - Validation error: commission_rate must be a percentage expressed as a zero-padded decimal to two decimal places (e.g. 0.17).
+test/fixtures/input-with-errors.txt:5 - Validation error: seller_name 'Alyce' not found.
+test/fixtures/input-with-errors.txt:6 - Product not found with key: ["Amazon", "1234512345"]
+test/fixtures/input-with-errors.txt:7 - wrong number of arguments (4 for 5)
+test/fixtures/input-with-errors.txt:8 - wrong number of arguments (6 for 5)
+test/fixtures/input-with-errors.txt:9 - Validation error: value must be a valid dollar value (dollar sign and cents are mandatory, minus sign if any preceds dollar sign, commas optional).
+test/fixtures/input-with-errors.txt:10 - Card value ($100.00) must be more than price ($190.00)
+test/fixtures/input-with-errors.txt:12 - Validation error: card_id must be a 10-digit card ID.

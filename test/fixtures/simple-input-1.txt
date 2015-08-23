@@ -1,0 +1,4 @@
+add_account Alice 0.20
+add_account Bob
+list_product Alice Amazon.com 1234512345 $100.00 $90.00
+buy_product Bob Amazon.com 1234512345

@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require "gcx"
+
+begin
+  GCX::Application.new(ARGV).run
+rescue Errno::ENOENT => err
+  abort "giftcard_market: #{err.message}"
+rescue OptionParser::InvalidOption => err
+  abort "giftcard_market: #{err.message}\nusage: giftcard_market [-a] [file ...]"
+end

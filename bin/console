@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "gcx"
+
+require "pry"
+Pry.start
+
+# Or if your prefer plain-old IRB:
+# require "irb"
+# IRB.start
