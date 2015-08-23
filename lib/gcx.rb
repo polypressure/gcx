@@ -6,6 +6,7 @@ require "bigdecimal"
 require "money"
 require "monetize"
 require 'shellwords'
+require 'ruby-progressbar'
 
 require "gcx/application"
 require "gcx/command"
