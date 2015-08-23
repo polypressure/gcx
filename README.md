@@ -17,10 +17,10 @@ I've packaged this up as a gem, following a structure I've used for standalone c
 There are two executables:
 
 * `bin/giftcard_market`:
-   * This is the main executable, which takes input from STDIN.
-   * Alternatively, you can give it a list of files on the command line, which it will process sequentially, treating them as a single file.
-   * By default, the program process all input, skipping over any lines with error conditions. Errors are logged (with offending filename and line number) to STDERR.
-   * If you provide the `-a` option, the program will abort immediately upon encountering bad input (e.g. an unknown command, missing or invalid arguments, missing accounts, etc.).
+  * This is the main executable, which takes input from STDIN.
+  * Alternatively, you can give it a list of files on the command line, which it will process sequentially, treating them as a single file.
+  * By default, the program process all input, skipping over any lines with error conditions. Errors are logged (with offending filename and line number) to STDERR.
+  * If you provide the `-a` option, the program will abort immediately upon encountering bad input (e.g. an unknown command, missing or invalid arguments, missing accounts, etc.).
 
 * `bin/console`:
   * This starts up an IRB/Pry console with the giftcard_market/gcx code and dependencies loaded up.
@@ -63,27 +63,27 @@ Besides `rake test`, some other ways to run the tests:
 It's a fairly conventional, pedestrian OOP design:
 
 ### Entry point, file and command parsing:
-* The [`giftcard_market`]() executable loads all the required libraries via [`lib/gcx.rb`](), then kicks off processing with the [`Application#run`]() method.
-* The [`Application`]() object parses any command-line arguments and options, reads the input, and hands off the individual lines to [`Command`]() objects.
-* The [`Command`]() parses the line and dispatches/delegates the processing the commands to two "model" objects (scare quotes because these aren't Rails ActiveRecord objects).
+* The [`giftcard_market`](https://bitbucket.org/polypressure/gcx/src/3036dd6c43392e47ed5d7528ac468b3ad126140e/bin/giftcard_market?at=master) executable loads all the required libraries via [`lib/gcx.rb`](https://bitbucket.org/polypressure/gcx/src/3036dd6c43392e47ed5d7528ac468b3ad126140e/lib/gcx.rb?at=master), then kicks off processing with the [`Application#run`](https://bitbucket.org/polypressure/gcx/src/3036dd6c43392e47ed5d7528ac468b3ad126140e/bin/giftcard_market?at=master#giftcard_market-6) method.
+* The [`Application`](https://bitbucket.org/polypressure/gcx/src/3036dd6c43392e47ed5d7528ac468b3ad126140e/lib/gcx/application.rb?at=master) object parses any command-line arguments and options, reads the input, and hands off the individual lines to [`Command`](https://bitbucket.org/polypressure/gcx/src/3036dd6c43392e47ed5d7528ac468b3ad126140e/lib/gcx/command.rb?at=master) objects.
+* The [`Command`](https://bitbucket.org/polypressure/gcx/src/3036dd6c43392e47ed5d7528ac468b3ad126140e/lib/gcx/command.rb?at=master) parses the line and dispatches/delegates the processing the commands to two "model" objects (scare quotes because these aren't Rails ActiveRecord objects).
 
 
 ### Model objects and main business logic:
-* The model objects are defined in [`lib/gcx/models`](), and are subclasses of a base [`Model`]() object which provides input parsing, validation, and formatting, as well as methods to store/fetch/delete models to an in-memory, hash-based key-value store.
+* The model objects are defined in [`lib/gcx/models`](https://bitbucket.org/polypressure/gcx/src/3036dd6c43392e47ed5d7528ac468b3ad126140e/lib/gcx/models/?at=master), and are subclasses of a base [`Model`](https://bitbucket.org/polypressure/gcx/src/3036dd6c43392e47ed5d7528ac468b3ad126140e/lib/gcx/models/model.rb?at=master) object which provides input parsing, validation, and formatting, as well as methods to store/fetch/delete models to an in-memory, hash-based key-value store.
 * There are two model objects:
-  * [`Account`]() contains the attributes and logic you'd pretty much expect, with the key methods letting you:
+  * [`Account`](https://bitbucket.org/polypressure/gcx/src/3036dd6c43392e47ed5d7528ac468b3ad126140e/lib/gcx/models/account.rb?at=master) contains the attributes and logic you'd pretty much expect, with the key methods letting you:
     * Add a new account to the marketplace.
     * Credit and debit amounts to/from the account's balance.
     * Generate the Account Summary report.
-  * [`Product`]() also is mostly unsurprising, with the key methods letting you:
+  * [`Product`](https://bitbucket.org/polypressure/gcx/src/3036dd6c43392e47ed5d7528ac468b3ad126140e/lib/gcx/models/product.rb?at=master) also is mostly unsurprising, with the key methods letting you:
     * List a product on the marketplace.
     * Purchase the product—including making all related credits and deductions (for sale proceeds, commissions, and purchase price), and removing the product from the marketplace.
-* Parsing, validation, and formatting logic is defined in the [`GCX::Validations`]() mixin:
+* Parsing, validation, and formatting logic is defined in the [`GCX::Validations`](https://bitbucket.org/polypressure/gcx/src/3036dd6c43392e47ed5d7528ac468b3ad126140e/lib/gcx/models/validations.rb?at=master) mixin:
   * Maybe a bit too many responsibilities in one module, but as usual with parsing and validation, they're all closely-related and fairly coupled.
   * The [Money](https://github.com/RubyMoney/money) and [Monetize](https://github.com/RubyMoney/monetize) gems are used for representing and processing money. Just easier than rolling my own with BigDecimal, etc.
 
 ### Key-value store and other notes:
 
-* The [ModelStore]() object is a wrapper for the [Moneta gem](https://github.com/minad/moneta). Out of the box, it's just using an in-memory, hash-based backend, but other backends (filesystem, relational/ORM, NoSQL, etc.) can be swapped in (mostly) transparently.
+* The [ModelStore](https://bitbucket.org/polypressure/gcx/src/3036dd6c43392e47ed5d7528ac468b3ad126140e/lib/gcx/model_store.rb?at=master) object is a wrapper for the [Moneta gem](https://github.com/minad/moneta). Out of the box, it's just using an in-memory, hash-based backend, but other backends (filesystem, relational/ORM, NoSQL, etc.) can be swapped in (mostly) transparently.
 * Of course, much of the model-like functionality could have been pulled in from Rails, ActiveModel, or other similar gems, but I wanted to minimize the dependencies.
 * In larger programs and Rails applications, I typically don't put any of the business logic in model objects, but in separate PORO domain objects. I also push parsing and validation to PORO form objects. YAGNI for this simple app.
