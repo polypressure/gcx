@@ -14,8 +14,3 @@ require "gcx/models/validations"
 require "gcx/models/model"
 require "gcx/models/account"
 require "gcx/models/product"
-
-
-module GCX
-  # Your code goes here...
-end
