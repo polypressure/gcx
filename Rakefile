@@ -8,3 +8,8 @@ Rake::TestTask.new(:test) do |t|
 end
 
 task :default => :test
+
+task :generate_data, [:num_listings, :filename] do |t, args|
+  require_relative 'test/tools/dataset_generator'
+  GCX::DatasetGenerator.generate_input_file(args[:num_listings], args[:filename])
+end
