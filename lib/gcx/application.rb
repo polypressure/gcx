@@ -36,21 +36,6 @@ module GCX
     private
 
     #
-    #
-    def start_progress_bar
-      return unless @options[:progress_bar]
-      @progress_bar = ProgressBar.create(
-        total: count = line_count(@file_list),
-        output: STDERR,
-        format: count ? "%t: %p%%|%B" : "Working [%a] %B"
-      )
-    end
-
-    def increment_progress_bar
-      @progress_bar.increment if @progress_bar
-    end
-
-    #
     # Process an individual file or stdio.
     #
     def process(lines, filename="stdio")
@@ -83,6 +68,22 @@ module GCX
       [params, files]
     end
 
+    def start_progress_bar
+      return unless @options[:progress_bar]
+      @progress_bar = ProgressBar.create(
+        total: count = line_count(@file_list),
+        output: STDERR,
+        format: count ? "%t: %p%%|%B" : "Working [%a] %B"
+      )
+    end
+
+    def increment_progress_bar
+      @progress_bar.increment if @progress_bar
+    end
+
+    #
+    # Get a line count of all the files in the list, for the progress bar.
+    #
     def line_count(file_list)
       file_list.empty? ?
         nil :
