@@ -39,6 +39,7 @@ module GCX
 
     end
 
+    # Instead of puts, which flushes on each write.
     def self.writeln(file, string)
       file.write("#{string}\n")
     end
@@ -50,7 +51,7 @@ module GCX
 
     def add_account_command
       name = account_name
-      cmd = "add_account #{name} #{commission_rate}".strip
+      cmd = "add_account \"#{name}\" #{commission_rate}".strip
       Command.process(cmd)
       @account_names << name
       cmd
@@ -58,7 +59,7 @@ module GCX
 
     def list_product_command
       product_key = [ brand, card_id ]
-      cmd = "list_product #{seller_name} \"#{product_key[0]}\" #{product_key[1]} #{value_and_price}"
+      cmd = "list_product \"#{seller_name}\" \"#{product_key[0]}\" #{product_key[1]} #{value_and_price}"
       Command.process(cmd)
       @product_keys << product_key
       cmd
@@ -66,14 +67,14 @@ module GCX
 
     def buy_product_command
       product = listed_product
-      cmd = "buy_product #{buyer_name(product.seller_name)} \"#{product.brand}\" #{product.card_id}"
+      cmd = "buy_product \"#{buyer_name(product.seller_name)}\" \"#{product.brand}\" #{product.card_id}"
       Command.process(cmd)
       @product_keys.delete([product.brand, product.card_id])
       cmd
     end
 
     def account_name
-      Faker::Name.first_name.gsub(/'/, '')
+      Faker::Name.name.gsub(/'/, '').strip
     end
 
     def commission_rate
