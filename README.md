@@ -2,30 +2,80 @@
 
 ## Installation
 
-I've packaged this up as a gem, following a structure I've used for standalone command-line Ruby projects in the past. It might seem a bit overkill for just a coding/screening exercise, but might as well take advantage of building on a known base, which gives structure and a few other things for free.
+I've packaged this up as a gem, following a structure I've used in the past for standalone command-line Ruby projects. It might seem a bit overkill for just a coding/screening exercise, but just taking advantage of a known base that gives some structure and a few other things for free.
 
-1. Clone the repo from the private BitBucket repo: `git clone https://github.com/polypressure/reservations.git`
-1. `cd` into the `gcx` directory (short for "giftcard exchange", shorter than "giftcard_market").
-1. Install the Ruby version, Ruby 2.2.2, which is specified in the `.ruby-version` file. I'm using RVM, so:
-   `rvm install ruby-2.2.2`
-1. Run `bin/setup` to install dependencies. These will be installed to the `gcx` gemset, which is specified in the `.ruby-gemset` file.
-1. Run `rake test` to run the test suite. (This might take a while, as there is one test that reads a 10,000-line input file).
-1. Run `rake install` to install the gem, including installing the executables.
+To install it:
+
+```bash
+
+# Clone the repo from the private BitBucket repo:
+% git clone https://bitbucket.org/polypressure/gcx
+
+# "gcx" is short for "giftcard exchange", and
+# shorter than "giftcard_market":
+% cd gcx
+
+# Install the Ruby version, Ruby 2.2.2, which is specified
+# in the .ruby-version file. I'm using RVM, so:
+% rvm install ruby-2.2.2
+
+# Install dependencies. These will be installed to the `gcx`
+# gemset, which is specified in the .ruby-gemset file:
+% bin/setup
+
+# Install the gem with the rake task, which also
+# installs the executable scripts:
+% rake install
+
+# Run the test suite. One of the tests reads a 10,000-line
+# file, so be patient:
+% rake test
+
+```
 
 ## Usage
 
-There are two executables:
+There are two executables, `giftcard_market` and `console`. The main program is `giftcard_market`, `console` starts up an interactive console with the giftcard_market/gcx code loaded up.
 
-* `bin/giftcard_market`:
-  * This is the main executable, which takes input from STDIN.
-  * Alternatively, you can give it a list of files on the command line, which it will process sequentially, treating them as a single file, concatenated file.
-  * By default, the program process all input, skipping over any lines with error conditions. Errors are logged (with offending filename and line number) to STDERR.
-  * If you give it the `-a` option, the program will abort immediately upon encountering bad input (e.g. an unknown command, missing or invalid arguments, missing accounts, etc.).
-  * If you give it the `-p` option, the program will display a progress bar. This is mainly useful for large input sets. One caveat: the progress bar is displayed via STDERR, so if there are any errors, the progress bar gets pushed down (and if you're redirecting stderr to a file, the progress bar will show up there). Just re-run without the -p option if there are any errors.
+Running `giftcard_market`:
 
-* `bin/console`:
-  * This starts up an IRB/Pry console with the giftcard_market/gcx code and dependencies loaded up.
-  * Of course, always very handy to have an interactive console/REPL to experiment with and interact with code. Just remember to include the `GCX::` module prefix when referencing class names.
+```bash
+
+# There's some test input files in the test/fixtures directory:
+% cd test/fixtures
+
+# Basic usage, reading from STDIN:
+% giftcard_market < simple-input-1.txt
+
+# Read files given on command line, can pass multiple files.
+# These will be processed sequentially and treated as a
+# single concatenated file:
+% giftcard_market simple-input-1.txt simple-input-2.txt
+
+# By default, the program process all input, skipping over
+# any lines with error conditions (e.g. an unknown command,
+# missing or invalid arguments, missing accounts, etc.)
+# Errors are logged (with offending filename and line
+# number) to STDERR:
+% giftcard_market input-with-errors.txt
+
+# If you give it the "-a" option, the program will abort
+# immediately upon encountering bad input:
+% giftcard_market -a input-with-errors.txt
+
+# If you give it the "-p" option, the program will display
+# a progres bar. This is mainly useful for large input sets.
+# One caveat: the progress bar is displayed via STDERR, so
+# if there are any errors, the progress bar gets pushed down
+# (and if you're redirecting stderr to a file, the progress
+# bar will show up there). Just re-run without the -p option
+# if there are any errors.
+% giftcard_market -p generated-10000-input.txt
+
+```
+
+When using the console, remember to include the `GCX::` module prefix when referencing class names.
+
 
 ## Test suite
 
