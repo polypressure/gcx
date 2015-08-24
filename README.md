@@ -2,7 +2,7 @@
 
 ## Installation
 
-I've packaged this up as a gem, following a structure I've used in the past for standalone command-line Ruby projects. It might seem a bit overkill for just a coding/screening exercise, but just taking advantage of a known base that gives some structure and a few other things for free.
+I've packaged this up as a gem, following a structure I've used in the past for standalone command-line Ruby projects. It might seem a bit overkill for a coding/screening exercise, but I'm just taking advantage of a known base that gives some structure and a few other things for free.
 
 To install it:
 
@@ -35,9 +35,9 @@ To install it:
 
 ## Usage
 
-There are two executables, `giftcard_market` and `console`. The main program is `giftcard_market`, `console` starts up an interactive console with the giftcard_market/gcx code loaded up.
+There are two executables, `giftcard_market` and `console`. The main program is `giftcard_market`. Run `console` to start up an interactive console with the giftcard_market/gcx code loaded up. 
 
-Running `giftcard_market`:
+Some notes on running `giftcard_market`:
 
 ```bash
 
@@ -47,9 +47,9 @@ Running `giftcard_market`:
 # Basic usage, reading from STDIN:
 % giftcard_market < simple-input-1.txt
 
-# Read files given on command line, can pass multiple files.
-# These will be processed sequentially and treated as a
-# single concatenated file:
+# Read files given as command line arguments, you can pass 
+# multiple files. These will be processed sequentially and 
+# treated as a single concatenated file:
 % giftcard_market simple-input-1.txt simple-input-2.txt
 
 # By default, the program process all input, skipping over
@@ -65,16 +65,24 @@ Running `giftcard_market`:
 
 # If you give it the "-p" option, the program will display
 # a progres bar. This is mainly useful for large input sets.
-# One caveat: the progress bar is displayed via STDERR, so
-# if there are any errors, the progress bar gets pushed down
-# (and if you're redirecting stderr to a file, the progress
-# bar will show up there). Just re-run without the -p option
-# if there are any errors.
+# 
+# This only works when you give filenames as command-line
+# arguments. When reading from STDIN, you just get a
+# "working" animation and timer.
+#
+# One other caveat: the progress bar is displayed via STDERR, 
+# so if there are any errors, the progress bar gets pushed 
+# down (and if you're redirecting stderr to a file, the 
+# progress bar will show up there). Just re-run without the
+# -p option if there are any errors.
 % giftcard_market -p generated-10000-input.txt
 
-```
+# Start up an interactive console to experiment with the
+# code. Remember to include the GCX:: module prefix when 
+# referencing class names:
+% console
 
-When using the console, remember to include the `GCX::` module prefix when referencing class names.
+```
 
 
 ## Test suite
