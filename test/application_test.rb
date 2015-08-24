@@ -33,5 +33,12 @@ module GCX
 
       Application.new(["test/fixtures/simple-input-1.txt"]).run
     end
+
+    test "displays progress bar when -p option is given" do
+      ProgressBar.expects(:create).returns(mock_pbar = mock)
+      mock_pbar.expects(:increment).at_least_once
+
+      Application.new(["-p", "test/fixtures/simple-input-1.txt"]).run
+    end
   end
 end
