@@ -64,7 +64,7 @@ Some notes on running `giftcard_market`:
 % giftcard_market -a input-with-errors.txt
 
 # If you give it the "-p" option, the program will display
-# a progres bar. This is mainly useful for large input sets.
+# a progress bar. This is mainly useful for large input sets.
 # 
 # This only works when you give filenames as command-line
 # arguments. When reading from STDIN, you just get a
