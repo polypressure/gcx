@@ -142,18 +142,17 @@ It's a fairly conventional, pedestrian OOP design:
 
 
 ### Model objects and main business logic:
-* The model objects are defined in [`lib/gcx/models`](https://bitbucket.org/polypressure/gcx/src/3036dd6c43392e47ed5d7528ac468b3ad126140e/lib/gcx/models/?at=master), and are subclasses of a base [`Model`](https://bitbucket.org/polypressure/gcx/src/3036dd6c43392e47ed5d7528ac468b3ad126140e/lib/gcx/models/model.rb?at=master) object which provides input parsing, validation, and formatting, as well as methods to store/fetch/delete models to an in-memory, hash-based key-value store.
-* There are two model objects:
-  * [`Account`](https://bitbucket.org/polypressure/gcx/src/3036dd6c43392e47ed5d7528ac468b3ad126140e/lib/gcx/models/account.rb?at=master) contains the attributes and logic you'd pretty much expect, with the key methods letting you:
+* The model objects are defined in [`lib/gcx/models`](https://bitbucket.org/polypressure/gcx/src/3036dd6c43392e47ed5d7528ac468b3ad126140e/lib/gcx/models/?at=master), and are subclasses of a base [`Model`](https://bitbucket.org/polypressure/gcx/src/3036dd6c43392e47ed5d7528ac468b3ad126140e/lib/gcx/models/model.rb?at=master) object which provides input parsing, validation, and formatting, as well as methods to store/fetch/delete models to an in-memory, hash-based key-value store. There are two model objects:
+* [`Account`](https://bitbucket.org/polypressure/gcx/src/3036dd6c43392e47ed5d7528ac468b3ad126140e/lib/gcx/models/account.rb?at=master) contains the attributes and logic you'd pretty much expect, with the key methods letting you:
     * Add a new account to the marketplace.
     * Credit and debit amounts to/from the account's balance.
     * Generate the Account Summary report.
-  * [`Product`](https://bitbucket.org/polypressure/gcx/src/3036dd6c43392e47ed5d7528ac468b3ad126140e/lib/gcx/models/product.rb?at=master) also is mostly unsurprising, with the key methods letting you:
+* [`Product`](https://bitbucket.org/polypressure/gcx/src/3036dd6c43392e47ed5d7528ac468b3ad126140e/lib/gcx/models/product.rb?at=master) also is mostly unsurprising, with the key methods letting you:
     * List a product on the marketplace.
     * Purchase the product—including making all related credits and deductions (for sale proceeds, commissions, and purchase price), and removing the product from the marketplace.
 * Parsing, validation, and formatting logic is defined in the [`GCX::Validations`](https://bitbucket.org/polypressure/gcx/src/3036dd6c43392e47ed5d7528ac468b3ad126140e/lib/gcx/models/validations.rb?at=master) mixin:
-  * Maybe a few too many responsibilities in one module, but as usual with parsing and validation, they're all closely-related and a pain to decouple.
-  * The [Money](https://github.com/RubyMoney/money) and [Monetize](https://github.com/RubyMoney/monetize) gems are used for representing and processing money. Just easier than rolling my own with BigDecimal, etc.
+    * Maybe a few too many responsibilities in one module, but as usual with parsing and validation, they're all closely-related and a pain to decouple.
+    * The [Money](https://github.com/RubyMoney/money) and [Monetize](https://github.com/RubyMoney/monetize) gems are used for representing and processing money. Just easier than rolling my own with BigDecimal, etc.
 
 ### Key-value store and other notes:
 
