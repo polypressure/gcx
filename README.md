@@ -126,7 +126,7 @@ You can generate large input data files for testing using this rake task:
 
 ```
 
-This creates a properly-formed test input file, using the (Faker)[https://github.com/stympy/faker] gem to generate fake name and brand data. The first parameter says how many `list_product` commands the file will contain. (The file will contain a random number of `add_account` commands that is larger than the number of listings, and a random number of `buy_product` commands that is less than the number of listings.) The second parameter is the filename where you want the generated data written.
+This creates a properly-formed test input file, using the [Faker](https://github.com/stympy/faker) gem to generate fake name and brand data. The first parameter says how many `list_product` commands the file will contain. (The file will contain a random number of `add_account` commands that is larger than the number of listings, and a random number of `buy_product` commands that is less than the number of listings.) The second parameter is the filename where you want the generated data written.
 
 Note that this tool is pretty crude—it won't generate any input lines with error conditions (e.g. bad commands, invalid prices, referential errors, etc). For now, it's mostly something to see how the program does with a bit more data.
 
