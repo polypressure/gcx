@@ -136,7 +136,7 @@ Note that this tool is pretty crude—it won't generate any input lines with err
 It's a fairly conventional, pedestrian OOP design:
 
 ### Entry point, file and command parsing:
-* The [`giftcard_market`](https://github.com/polypressure/gcx/blob/master/bin/giftcard_market) executable loads all the required libraries via [`lib/gcx.rb`](https://github.com/polypressure/gcx/blob/master/lib/gcx.rb), then kicks off processing with the [`Application#run`]https://github.com/polypressure/gcx/blob/master/bin/giftcard_market#L6) method.
+* The [`giftcard_market`](https://github.com/polypressure/gcx/blob/master/bin/giftcard_market) executable loads all the required libraries via [`lib/gcx.rb`](https://github.com/polypressure/gcx/blob/master/lib/gcx.rb), then kicks off processing with the [`Application#run`](https://github.com/polypressure/gcx/blob/master/bin/giftcard_market#L6) method.
 * The [`Application`](https://github.com/polypressure/gcx/blob/master/lib/gcx/application.rb) object parses any command-line arguments and options, reads the input, and hands off the individual lines to [`Command`](https://github.com/polypressure/gcx/blob/master/lib/gcx/command.rb) objects.
 * The [`Command`](https://github.com/polypressure/gcx/blob/master/lib/gcx/command.rb) parses the line and dispatches/delegates the processing the commands to two "model" objects (scare quotes because these aren't Rails ActiveRecord objects).
 
